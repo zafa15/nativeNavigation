@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
+import { COLORS } from '../constants/color';
 
 const DeviceItem = ({item, onSelected}) => {
 
@@ -30,14 +31,15 @@ const styles = StyleSheet.create({
         padding: 20,
         margin: 10,
         borderRadius: 3,
-        backgroundColor: '#ccc'
+        /* backgroundColor: COLORS.yellowPastel */
+        backgroundColor:'#fff'
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: 'JosefinSansBold'
     },
     details: {
-        fontSize: 18
+        fontSize: 16
     }
 });
 
