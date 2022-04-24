@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { FlatList } from 'react-native';
 import DeviceItem from '../components/DeviceItem';
-import {DEVICES} from '../data/devices';
+import { useSelector, useDispatch } from 'react-redux';
+import { filteredDevice, selectDevice } from '../store/actions/device.action';
+//import {DEVICES} from '../data/devices';
 
-const CategoryDeviceScreen = ({navigation,route}) => {
+/* const CategoryDeviceScreen = ({navigation,route}) => { */
+const CategoryDeviceScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const categoryDevice = useSelector(state => state.devices.filteredDevice);
+  const category = useSelector(state => state.categories.selected);
+  //const devices = DEVICES.filter(device => device.category === route.params.categoryID);
 
-  const devices = DEVICES.filter(device => device.category === route.params.categoryID);
-
-  console.log(devices);
+  useEffect(() => {
+    dispatch(filteredDevice(category.id))
+  },[]);
 
   const handleSelected = (item) => {
+    dispatch(selectDevice(item.id))
     navigation.navigate('Detail', {
-      productID: item.id,
+      //productID: item.id,
       device: item
     });
   }
@@ -22,7 +30,7 @@ const CategoryDeviceScreen = ({navigation,route}) => {
 
   return (
     <FlatList
-      data={devices}
+      data={categoryDevice}
       keyExtractor={item => item.id}
       renderItem={renderItemDevice}
     />

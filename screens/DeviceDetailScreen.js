@@ -1,8 +1,14 @@
+import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
-const DeviceDetailScreen = ({route}) => {
-  const device = route.params.device;
-  console.log(device);
+/* const DeviceDetailScreen = ({route}) => { */
+const DeviceDetailScreen = () => {
+  const device = useSelector(state => state.devices.selected)
+
+  /* const device = route.params.device;
+  console.log(device); */
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{device.name}</Text>
