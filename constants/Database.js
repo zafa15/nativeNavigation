@@ -1,0 +1,1 @@
+export const URL_API = 'https://marketapp-5c6bf-default-rtdb.firebaseio.com'
