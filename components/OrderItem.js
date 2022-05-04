@@ -3,17 +3,26 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../constants/color';
 
+const formatDay = (time) => {
+    const date = new Date(time)
+    return date.toLocaleDateString()
+}
 
-const CartItem = ({item, onDelete}) => {
+const sumTotal= (list) => list.map(item => item.quantity*item.price).reduce((a,b) => a + b, 0)
+
+const OrdenItem = ({item, onDelete}) => {
+
+    //onsole.log(item);
+
     return(
         <View style={styles.item}>
             <View>
+                <Text>{formatDay(item.date)}</Text>
                 <Text style={styles.header}>{item.name}</Text>
             </View>
             <View style={styles.detail}>
                 <View>
-                    <Text style={styles.text}>Cantidad: {item.quantity}</Text>
-                    <Text style={styles.text}>{item.price}</Text>
+                    <Text style={styles.text}>{sumTotal(item.items)}</Text>
                 </View>
                 <TouchableOpacity onPress={ ()=>onDelete(item.id)}>
                     <Ionicons name="trash" size={24} color={COLORS.purple}/>
@@ -52,4 +61,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CartItem
+export default OrdenItem

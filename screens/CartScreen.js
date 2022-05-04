@@ -1,19 +1,28 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { CART } from '../data/cart';
+//import { CART } from '../data/cart';
 import CartItem from '../components/CartItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { confirmCart, removeItem } from '../store/actions/cart.action';
 
 const CartScreen = () => {
+    const dispatch = useDispatch();
+    const items = useSelector(state => state.cart.items);
+    const total = useSelector(state => state.cart.total);
+    
 
-    const items = CART;
-    const total = 12000;
-
-    const handlerConfirmCart = () => console.log('Confirmar Carrito');
-    const handlerDeleteItem = (item) => console.log('Eliminar Elemento: ' + item.name);
+    const handlerConfirmCart = () => {
+      if(items.length>0){
+        dispatch(confirmCart(items, total));
+      }else{
+        console.log("No hay elementos en la lista.");
+      }
+    };
+    const handlerDeleteItem = id => dispatch(removeItem(id))
 
     const renderItem = ({ item }) => (
-        <CartItem item={item} onDelete={handlerDeleteItem.bind(this, item)} />
+        <CartItem item={item} onDelete={handlerDeleteItem.bind(this, item.id)} />
     )
 
     console.log(items.length);
