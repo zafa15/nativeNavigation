@@ -1,1 +1,2 @@
-export const URL_API = 'https://marketapp-5c6bf-default-rtdb.firebaseio.com'
+export const URL_API = 'https://marketapp-5c6bf-default-rtdb.firebaseio.com';
+export const URL_AUTH_SIGNUP = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBUZj7OlW6AADy9v8hVd6H721UY0Lq9xIA';
